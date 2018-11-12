@@ -1,44 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Description of features implemented:
 
-## Available Scripts
+From the thousands of records/gnomes received from the api call I have sliced them to show only 14 records on a table.
 
-In the project directory, you can run:
+The columns chosen to show on screen are: ID, Name and Thumbnail.
+You can: search a gnome by name, clean the search to display the full list of gnomes again and click each gnome to view more details of it.
 
-### `npm start`
+### The structure of folders are the following:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Src:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```sh
+	components: stateless components here.
+```
+-	GnomeItem: with Id, name and thumbnail. They'll display on each table row.
+-	Routes: 2 routes of the app: list and detail.
+-	Notification: toast to be displayed on fetch error.
+```sh
+	 Containers: components connected to redux that get their state and dispatch actions to change the app state.
+```
 
-### `npm test`
+-	GnomeDetail: displays more details of the selected gnome
+-	GnomeList: displays 14 gnomes on the table from the api call.
+```sh
+	 Mock: data from api call mocked.
+```
+```sh
+	 Service: the axios call to the api.
+```
+```sh
+	Store: it has the action creators, their types of actions (constants) and the reducer file with its unit tests.
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+	Utils folder: it has a storeUtil that is passed as props on unit tests and an updaterState file which returns the redux state updated.
+```
+### To run the app
+```sh
+$ npm install
+$ npm start
+```
+### To run the unit tests
+```sh
+$ npm test
+```
 
-### `npm run build`
+I have implemented unit tests on reducers instead of action creators because are the sync ones that test the final changes.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Then I’ve implemented unit tests on GnomeList container and GnomeDetail container too.
+On containers I mocked the props and the action creators to see whether they’re called or not because as a convention when testing containers there’s no need to test the results from the action creators only see if they’ve been called instead.
